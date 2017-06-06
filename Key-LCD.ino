@@ -3,8 +3,8 @@
 #include <LiquidCrystal_I2C.h>
 
 LiquidCrystal_I2C lcd(0x26, 16, 2);
-curPosicion = 0
-curFila = 1
+int pos = 0;
+int fil = 1;
 const byte ROWS = 4; // Cuatro filas
 const byte COLS = 4; // Cuatro columnas
 // Define the Keymap
@@ -20,22 +20,30 @@ byte rowPins[ROWS] = { 4, 5, 6, 7 };
 byte colPins[COLS] = { 8, 9, 10, 11 }; 
 // Create the Keypad
 Keypad kpd = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
-
+char key;
 void setup()
 {
  lcd.init();
  lcd.backlight();
-    lcd.setCursor(curPosicion, curFila); 
+ lcd.setCursor(pos, fil); 
 }
 
 void loop()
 {
-   lcd.setCursor(curPosicion, curFila);
-  char key = kpd.getKey();
+   if (pos <= 16)
+   {
+   lcd.setCursor(pos, fil);
+   key = kpd.getKey();
+   }
+   else
+   {
+    pos =0;
+    lcd.setCursor(pos, fil);
+    }
   if(key)  // Check for a valid key.
   {
  lcd.print(key);
- curPosicion + +;
+ pos = pos + 1;
 
   }
  
