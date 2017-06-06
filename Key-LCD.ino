@@ -34,18 +34,8 @@ void loop()
   char key = kpd.getKey();
   if(key)  // Check for a valid key.
   {
-    switch (key)
-    {
-      case '*':
-        lcd.print(key);
-        break;
-      case '#':
-       lcd.print(key);
-        break;
-      default:
-        Serial.println(key);
-    }
+ lcd.print(key);
+
   }
  
-
 }
