@@ -12,12 +12,12 @@ char keys[ROWS][COLS] = {
   {'1','2','3','A'},
   {'4','5','6','B'},
   {'7','8','9','C'},
-  {'#','0','*','D'}
+  {'*','0','#','D'}
 };
 // Connect keypad ROW0, ROW1, ROW2 and ROW3 to these Arduino pins.
-byte rowPins[ROWS] = { 4, 5, 6, 7 };
+byte rowPins[ROWS] = { 11, 10, 9, 8 };
 // Connect keypad COL0, COL1 and COL2 to these Arduino pins.
-byte colPins[COLS] = { 8, 9, 10, 11 }; 
+byte colPins[COLS] = { 7, 6, 5, 4 }; 
 // Create the Keypad
 Keypad kpd = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
 char key;
@@ -30,6 +30,12 @@ void setup()
 
 void loop()
 {
+   if (key == '*')
+   {
+   pos =0;
+   lcd.clear();
+   lcd.setCursor(pos, fil);
+   }
    if (pos <= 16)
    {
    lcd.setCursor(pos, fil);
@@ -38,6 +44,7 @@ void loop()
    else
    {
     pos =0;
+    lcd.clear();
     lcd.setCursor(pos, fil);
     }
   if(key)  // Check for a valid key.
