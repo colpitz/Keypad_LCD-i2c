@@ -3,7 +3,8 @@
 #include <LiquidCrystal_I2C.h>
 
 LiquidCrystal_I2C lcd(0x26, 16, 2);
-
+curPosicion = 0
+curFila = 1
 const byte ROWS = 4; // Cuatro filas
 const byte COLS = 4; // Cuatro columnas
 // Define the Keymap
@@ -24,17 +25,17 @@ void setup()
 {
  lcd.init();
  lcd.backlight();
-  
- Serial.begin(9600);
+    lcd.setCursor(curPosicion, curFila); 
 }
 
 void loop()
 {
-   lcd.setCursor(0, 1);
+   lcd.setCursor(curPosicion, curFila);
   char key = kpd.getKey();
   if(key)  // Check for a valid key.
   {
  lcd.print(key);
+ curPosicion + +;
 
   }
  
